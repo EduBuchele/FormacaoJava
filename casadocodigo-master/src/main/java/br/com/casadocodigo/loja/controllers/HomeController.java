@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,6 +43,16 @@ public class HomeController {
 		ModelAndView modelAndView = new ModelAndView("home");
 		modelAndView.addObject("produtos", produtos);
 		return modelAndView;
+	}
+
+	@Autowired
+	private ProdutoDAO dao;
+
+	@RequestMapping("/relatorio-produtos{id}")
+	@ResponseBody
+	public Produto detalheJson(@PathVariable("id") Integer id) {
+		Produto produto = dao.find(id);
+		return produto;
 	}
 
 	@ResponseBody

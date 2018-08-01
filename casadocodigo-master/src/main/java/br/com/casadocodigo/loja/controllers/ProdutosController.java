@@ -26,13 +26,13 @@ import br.com.casadocodigo.loja.validation.ProdutoValidation;
 @Controller
 @RequestMapping("/produtos")
 public class ProdutosController {
-	
+
 	@Autowired
 	private ProdutoDAO dao;
-	
+
 	@Autowired
-    private FileSaver fileSaver;
-	
+	private FileSaver fileSaver;
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new ProdutoValidation());
@@ -44,45 +44,45 @@ public class ProdutosController {
 		modelAndView.addObject("tipos", TipoPreco.values());
 		return modelAndView;
 	}
-	
-	@RequestMapping(method=RequestMethod.POST)
-	@CacheEvict(value="produtosHome", allEntries=true)
-	public ModelAndView gravar(MultipartFile sumario, @Valid Produto produto, BindingResult result, 
-				RedirectAttributes redirectAttributes){
-		
-		if(result.hasErrors()) {
+
+	@RequestMapping(method = RequestMethod.POST)
+	@CacheEvict(value = "produtosHome", allEntries = true)
+	public ModelAndView gravar(MultipartFile sumario, @Valid Produto produto, BindingResult result,
+			RedirectAttributes redirectAttributes) {
+
+		if (result.hasErrors()) {
 			return form(produto);
 		}
-		
+
 		String path = fileSaver.write("arquivos-sumario", sumario);
 		produto.setSumarioPath(path);
-		
+
 		dao.gravar(produto);
-		
+
 		redirectAttributes.addFlashAttribute("message", "Produto cadastrado com sucesso!");
-		
+
 		return new ModelAndView("redirect:/produtos");
 	}
-	
-	@RequestMapping( method=RequestMethod.GET)
+
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView listar() {
 		List<Produto> produtos = dao.listar();
 		ModelAndView modelAndView = new ModelAndView("produtos/lista");
 		modelAndView.addObject("produtos", produtos);
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/detalhe/{id}")
-	public ModelAndView detalhe(@PathVariable("id") Integer id){
-	    ModelAndView modelAndView = new ModelAndView("/produtos/detalhe");
-	    Produto produto = dao.find(id);
-	    
+	public ModelAndView detalhe(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("/produtos/detalhe");
+		Produto produto = dao.find(id);
+
 //	    if(true) throw new RuntimeException("Excessão Genérica Acontecendo!!!!");
-	    
-	    modelAndView.addObject("produto", produto);
-	    return modelAndView;
+
+		modelAndView.addObject("produto", produto);
+		return modelAndView;
 	}
-	
+
 //	@RequestMapping("/{id}")
 //	@ResponseBody
 //	public Produto detalheJson(@PathVariable("id") Integer id){
@@ -90,7 +90,7 @@ public class ProdutosController {
 //	    return produto;
 //	}
 
-    //tratamente de exceção especifica nesse controlador 
+	// tratamente de exceção especifica nesse controlador
 //	@ExceptionHandler(NoResultException.class)
 //	public String trataDetalheNaoEcontrado(){
 //	    return "error";
