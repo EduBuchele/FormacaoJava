@@ -1,7 +1,7 @@
 package br.com.casadocodigo.loja.dao;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -58,10 +58,11 @@ public class ProdutoDAO {
 				.getResultList();
 	}
 
-	public List<Produto> relatorioItensPorData(Date data) {
-		return manager
-				.createQuery("select distinct(p) from Produto p where dataLancamento = :dataLancamento", Produto.class)
-				.setParameter("Date", data).getResultList();
+	public List<Produto> relatorioItensPorData(Calendar dataV) {
+		System.out.println(dataV);
+		return manager.createQuery("select distinct(p) from Produto p where p.dataLancamento >= :data", Produto.class)
+				.setParameter("data", dataV).getResultList();
 	}
+	// select & from produto where dataLancamento> "2018-01-01";
 
 }

@@ -1,11 +1,15 @@
 package br.com.casadocodigo.loja.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.casadocodigo.loja.dao.ProdutoDAO;
@@ -18,19 +22,32 @@ public class RelatorioProdutosController {
 	private ProdutoDAO dao;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public Relatorio gerarRelatorio() {
+	public Relatorio gerarRelatorio(String data) throws Exception {
+		// Data inserida na URL
+		// System.out.println("_________________________" + data);
+
+		// Formatando String para Calendar
+		Calendar dataFormatada = GregorianCalendar.getInstance();
+		SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+		dataFormatada.setTime(formatador.parse(data));
+
+		// Imprimindo data formatada
+		// System.out.println("_________________________" + dataFormatada);
+
 		Relatorio relatorio = new Relatorio();
 		relatorio.setDataAtual(Calendar.getInstance());
 		relatorio.setQuantidade(dao.relatorioQuantidade());
-		relatorio.setProdutos(dao.relatorioItens());
+		System.out.println("TSte");
+		relatorio.setProdutos(dao.relatorioItensPorData(dataFormatada));
 		// dao.gravarRelatorio(relatorio);
 		return relatorio;
 	}
 
 	@RequestMapping("/relatorio-produtos")
 	@ResponseBody
-	public Relatorio relatorioJson() {
-		Relatorio relatorio = gerarRelatorio();
+	public Relatorio relatorioJson(@RequestParam(value = "data", required = false) String data) throws Exception {
+		System.out.println("Pedindo relatorio");
+		Relatorio relatorio = gerarRelatorio(data);
 		System.out.println(relatorio);
 		return relatorio;
 	}

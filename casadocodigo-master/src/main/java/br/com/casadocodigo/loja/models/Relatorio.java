@@ -22,7 +22,7 @@ public class Relatorio implements Serializable {
 	private int id;
 
 	@DateTimeFormat
-	private Calendar dataAtual = Calendar.getInstance();
+	private Calendar dataAtual;
 
 	private long quantidade;
 
