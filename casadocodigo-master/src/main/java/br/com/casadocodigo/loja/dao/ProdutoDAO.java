@@ -48,8 +48,10 @@ public class ProdutoDAO {
 		manager.persist(relatorio);
 	}
 
-	public Long relatorioQuantidade() {
-		TypedQuery<Long> query = manager.createQuery("select count(p) from Produto p", Long.class);
+	public Long relatorioQuantidade(Calendar data) {
+		TypedQuery<Long> query = manager
+				.createQuery("select count(p) from Produto p where p.dataLancamento >= :data", Long.class)
+				.setParameter("data", data);
 		return query.getSingleResult();
 	}
 
@@ -58,10 +60,9 @@ public class ProdutoDAO {
 				.getResultList();
 	}
 
-	public List<Produto> relatorioItensPorData(Calendar dataV) {
-		System.out.println(dataV);
+	public List<Produto> relatorioItensPorData(Calendar data) {
 		return manager.createQuery("select distinct(p) from Produto p where p.dataLancamento >= :data", Produto.class)
-				.setParameter("data", dataV).getResultList();
+				.setParameter("data", data).getResultList();
 	}
 	// select & from produto where dataLancamento> "2018-01-01";
 

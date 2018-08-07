@@ -26,17 +26,22 @@ public class RelatorioProdutosController {
 		// Data inserida na URL
 		// System.out.println("_________________________" + data);
 
-		// Formatando String para Calendar
 		Calendar dataFormatada = GregorianCalendar.getInstance();
+		dataFormatada.set(1500, 01, 01);
 		SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-		dataFormatada.setTime(formatador.parse(data));
 
+		// Filtrando Data Vazia
+		if (data != null) {
+			dataFormatada.setTime(formatador.parse(data));
+		} else {
+
+		}
 		// Imprimindo data formatada
 		// System.out.println("_________________________" + dataFormatada);
 
 		Relatorio relatorio = new Relatorio();
 		relatorio.setDataAtual(Calendar.getInstance());
-		relatorio.setQuantidade(dao.relatorioQuantidade());
+		relatorio.setQuantidade(dao.relatorioQuantidade(dataFormatada));
 		System.out.println("TSte");
 		relatorio.setProdutos(dao.relatorioItensPorData(dataFormatada));
 		// dao.gravarRelatorio(relatorio);
