@@ -21,8 +21,9 @@ public class RelatorioProdutosController {
 	@Autowired
 	private ProdutoDAO dao;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public Relatorio gerarRelatorio(String data) throws Exception {
+	@RequestMapping(value = "/relatorio-produtos", method = RequestMethod.GET)
+	@ResponseBody
+	public Relatorio relatorioJson(@RequestParam(value = "data", required = false) String data) throws Exception {
 		// Data inserida na URL
 		// System.out.println("_________________________" + data);
 
@@ -42,50 +43,10 @@ public class RelatorioProdutosController {
 		Relatorio relatorio = new Relatorio();
 		relatorio.setDataAtual(Calendar.getInstance());
 		relatorio.setQuantidade(dao.relatorioQuantidade(dataFormatada));
-		System.out.println("TSte");
 		relatorio.setProdutos(dao.relatorioItensPorData(dataFormatada));
 		// dao.gravarRelatorio(relatorio);
+
 		return relatorio;
 	}
-
-	@RequestMapping("/relatorio-produtos")
-	@ResponseBody
-	public Relatorio relatorioJson(@RequestParam(value = "data", required = false) String data) throws Exception {
-		System.out.println("Pedindo relatorio");
-		Relatorio relatorio = gerarRelatorio(data);
-		System.out.println(relatorio);
-		return relatorio;
-	}
-
-//	@RequestMapping(method = RequestMethod.GET)
-//	public Relatorio gerarRelatorioData(Date data) {
-//		System.out.println("Buscando dados");
-//		Relatorio relatorio = new Relatorio();
-//		System.out.println(dao.relatorioItensPorData(data));
-//		System.out.println(dao.relatorioQuantidade());
-//		relatorio.setDataAtual(Calendar.getInstance());
-//		System.out.println("Inserindo Dados");
-//		relatorio.setQuantidade(dao.relatorioQuantidade());
-//		relatorio.setProdutos(dao.relatorioItensPorData(data));
-//		System.out.println("Conferindo Relatorio");
-//		System.out.println(relatorio.getProdutos());
-//		System.out.println("qtdd relt: " + relatorio.getQuantidade());
-//		// dao.gravarRelatorio(relatorio);
-//		return relatorio;
-//	}
-//	@RequestMapping("/relatorio-produtos{date}")
-//	@ResponseBody
-//	public Relatorio relatorioDataJson(Date data) {
-//		Relatorio relatorio = gerarRelatorioData(data);
-//		System.out.println("Fim");
-//		System.out.println(relatorio);
-//		return relatorio;
-//	}
 
 }
-
-//	
-//	public Produto detalheJson(@PathVariable("id") Date ){
-//	    Produto produto = dao.find(id);
-//	    return produto;
-//	}

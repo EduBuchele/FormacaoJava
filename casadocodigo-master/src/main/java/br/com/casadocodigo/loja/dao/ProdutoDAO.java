@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.casadocodigo.loja.models.Pedido;
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.models.Relatorio;
 import br.com.casadocodigo.loja.models.TipoPreco;
@@ -66,4 +67,7 @@ public class ProdutoDAO {
 	}
 	// select & from produto where dataLancamento> "2018-01-01";
 
+	public void gravarPedido(Pedido pedido) {
+		manager.persist(pedido);
+	}
 }

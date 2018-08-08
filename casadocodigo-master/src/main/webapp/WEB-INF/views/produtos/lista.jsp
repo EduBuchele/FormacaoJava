@@ -37,7 +37,7 @@
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	      	 <li class="nav-item">
-	      	 	<a href="<c:url value="/logout" />">Sair</a></span>
+	      	 	<span><a href="<c:url value="/logout" />">Sair</a></span>
 	      	 </li>
 	      	 <li class="nav-item">
 	      	 	<a href="#">
