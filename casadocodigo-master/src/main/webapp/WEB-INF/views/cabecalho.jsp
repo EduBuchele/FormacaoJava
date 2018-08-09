@@ -4,14 +4,17 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <c:url value="/" var="contextPath" />
+<c:url value="/resources/css" var="cssPath" />
+<link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
+<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
 
-	<header id="layout-header">
+	<header id="layout-header" >
 	
-		<div class="clearfix container">
+		<div class="clearfix container"  >
 			<a href="${contextPath}" id="logo"> </a>
 			<div id="header-content">
 				<nav id="main-nav" >
-					<ul class="nav navbar-nav navbar-left">
+					<ul class="nav navbar-nav navbar-left" >
 					<security:authorize access="hasRole('ROLE_ADMIN')">
 						<li><a href="${s:mvcUrl('PC#listar').build() }" rel="nofollow"><fmt:message key="menu.lista_produtos"/></a></li>
 						<li><a href="${s:mvcUrl('PC#form').build() }" rel="nofollow"><fmt:message key="menu.cadastro_produtos"/></a></li>
@@ -25,7 +28,7 @@
 						</li>
 						<li>
 						    <a href="?locale=pt" rel="nofollow">
-						        <fmt:message key="menu.pt"/>
+						        <fmt:message key="menu.pt" />
 						    </a>
 						</li>
 						

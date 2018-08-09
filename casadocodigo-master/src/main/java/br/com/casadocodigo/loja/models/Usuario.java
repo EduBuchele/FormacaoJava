@@ -26,6 +26,21 @@ public class Usuario implements UserDetails {
 
 	private String senha;
 
+	private String senha2;
+
+	public String getSenha2() {
+		return senha2;
+	}
+
+	public void setSenha2(String senha2) {
+		this.senha2 = senha2;
+	}
+
+	@Override
+	public String toString() {
+		return this.nome;
+	}
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Usuario_Role", joinColumns = @JoinColumn(name = "email"), inverseJoinColumns = @JoinColumn(name = "role_nome"))
 	private List<Role> roles = new ArrayList<>();

@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/produtos/detalhes/**").permitAll().antMatchers("/produtos/**")
 				.hasRole("ADMIN").antMatchers("/carrinho/**").permitAll().antMatchers("/pagamento/**").permitAll()
 				.antMatchers("/pedidos/**").hasRole("ADMIN").antMatchers("/relatorio-produtos/**").permitAll()
-				.antMatchers("/").permitAll()
+				.antMatchers("/").permitAll().antMatchers("/usuarios/**").permitAll()
 				.antMatchers("/url-magica-maluca-oajksfbvad6584i57j54f9684nvi658efnoewfmnvowefnoeijn").permitAll()
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
 				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
