@@ -11,39 +11,26 @@
 	titulo="Livros de Java, Android, iPhone, Ruby, PHP e muito mais ....">
 	<section>
 		<div class="container">
-			<h1>Lista de Usuarios</h1>
+			<h1>Cadastro de Permissoes</h1>
 			<p>${sucesso}</p>
 			<p>${falha}</p>
 			<p>${message}</p>
 
-			<table class="table table-bordered table-striped table-hover">
-				<tr>
-					<th>Nome</th>
-					<th>Email</th>
-					<th>Roles</th>
-					<th></th>
-				</tr>
-				<c:forEach items="${usuarios }" var="usuario">
-					<tr>
-						<td>${usuario.nome }</td>
-						<td>${usuario.email }</td>
-						<td>${usuario.roles }</td>
-						<td>
-						<form:form action="${s:mvcUrl('UC#roles').build()}">
-					<input type="submit" value="Editar Roles" />
-				</form:form>
-						</td>
 
+			<tr>
+			<c:forEach items="${listaRoles }" var="listaRoles">
+					<tr>
+						<td>${listaRoles.nome }</td>
+						<td><input type="checkbox" name="finalizado" 
+              value="true" ${listaRoles.nome} 'checked' : '' }/></td>
 					</tr>
 				</c:forEach>
+              <tr></tr>
+				
+				<td><li class="btn btn-default"><span><a
+							href="${s:mvcUrl('UC#listar').build()}">Atualizar</a></span></li></td>
+			</tr>
 
-			</table>
-			<ul>
-				<form:form action="${s:mvcUrl('UC#form').build()}">
-					<input type="submit" value="Cadastro de Usuario" />
-				</form:form>
-
-			</ul>
 		</div>
 	</section>
 </tags:pageTemplate>

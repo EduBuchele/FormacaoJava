@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.dao.UsuarioDAO;
+import br.com.casadocodigo.loja.models.Role;
 import br.com.casadocodigo.loja.models.Usuario;
 import br.com.casadocodigo.loja.validation.UsuarioValidation;
 
@@ -33,10 +34,10 @@ public class UsuariosController {
 
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public ModelAndView form(Usuario usuario) {
-		ModelAndView modelAndView = new ModelAndView("usuarios/form");
+		ModelAndView modelAndView1 = new ModelAndView("usuarios/form");
 		// modelAndView.addObject("tipos", TipoPreco.values());
 
-		return modelAndView;
+		return modelAndView1;
 	}
 
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
@@ -60,9 +61,22 @@ public class UsuariosController {
 	public ModelAndView listar() {
 		List<Usuario> usuarios = dao.listar();
 
-		ModelAndView modelAndView = new ModelAndView("usuarios/lista");
-		modelAndView.addObject("usuarios", usuarios);
-		return modelAndView;
+		ModelAndView modelAndView2 = new ModelAndView("usuarios/lista");
+		modelAndView2.addObject("usuarios", usuarios);
+		return modelAndView2;
+
+	}
+
+	@RequestMapping("/roles")
+	public ModelAndView roles(Usuario usuario) {
+		List<Role> listaRoles = dao.listarRoles();
+		System.out.println(listaRoles);
+
+		ModelAndView modelAndView3 = new ModelAndView("usuarios/roles");
+
+		modelAndView3.addObject("listaRoles", listaRoles);
+
+		return modelAndView3;
 
 	}
 
