@@ -93,7 +93,7 @@ public class Produto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Produto [titulo=" + titulo + ", descricao=" + descricao + ", paginas=" + paginas + "]";
+		return titulo;
 	}
 
 	@Override

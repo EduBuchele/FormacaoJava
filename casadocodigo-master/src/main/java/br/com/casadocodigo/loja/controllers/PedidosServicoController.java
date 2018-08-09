@@ -33,6 +33,17 @@ public class PedidosServicoController {
 
 		return modelAndView;
 	}
+//	public void gerarString() {
+//		List<Pedido> lista = BuscaPedidos();
+//
+//		System.out.println(lista);
+//
+//	}
+	// StringBuilder builder = new StringBuilder();
+//		for (Produto titulo : produtos) {
+//			StringBuilder texto1 = builder.append(titulo);
+//			System.out.println(texto1);
+//		}
 
 	public List<Pedido> BuscaPedidos() {
 

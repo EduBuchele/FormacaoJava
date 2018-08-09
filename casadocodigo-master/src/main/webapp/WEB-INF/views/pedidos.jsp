@@ -13,8 +13,7 @@
 	<section class="pedidos">
 		<div class="container">
 			<h1>Lista de Pedidos Atuais</h1>
-			<p>${sucesso}</p>
-			<p>${falha}</p>
+	
 
 			<table class="table table-bordered table-striped table-hover">
 				<tr>
@@ -23,23 +22,14 @@
 					<th>Data Pedido</th>
 					<th>Titulos</th>
 				</tr>
-				<c:forEach items="${pedidos }" var="pedidos">
-<					<tr>
+				<c:forEach items="${pedidos}" var="pedidos">
+					<tr>
 						<td>${pedidos.id }</td>
 						<td>${pedidos.valor }</td>
 						<td>${pedidos.data }</td>
-						<td>${pedidos.produtos }</td>
+						<td>${pedidos.produtos}</td>
 					</tr>
 				</c:forEach>
-
-
-				<!-- 		<tr>
-						<th>2154</th>
-						<th>215,00</th>
-						<th>2018-01-01</th>
-						<th>muitos livros</th>
-					</tr> -->
-
 			</table>
 		</div>
 	</section>

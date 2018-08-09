@@ -34,7 +34,7 @@ public class Pedido implements Serializable {
 	}
 
 	public String getValor() {
-		return ("R$" + valor);
+		return valor;
 	}
 
 	public void setValor(String valor) {
@@ -50,8 +50,8 @@ public class Pedido implements Serializable {
 		this.data = data;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
+	public String getProdutos() {
+		return produtos.toString().replaceAll("(\\[)*(\\])*", "");
 	}
 
 	public void setProdutos(List<Produto> produtos) {
