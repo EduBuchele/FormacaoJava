@@ -11,25 +11,35 @@
 	titulo="Livros de Java, Android, iPhone, Ruby, PHP e muito mais ....">
 	<section>
 		<div class="container">
-			<h1>Cadastro de Permissoes</h1>
-			<p>${sucesso}</p>
-			<p>${falha}</p>
-			<p>${message}</p>
+			<td><form:form
+					action="${s:mvcUrl('UC#salvaRoles').arg(0, usuario.nome).build() }"
+					method="POST" commandName="usuario">
 
-
-			<tr>
-			<c:forEach items="${listaRoles }" var="listaRoles">
 					<tr>
-						<td>${listaRoles.nome }</td>
-						<td><input type="checkbox" name="finalizado" 
-              value="true" ${listaRoles.nome} 'checked' : '' }/></td>
+						<h1>Cadastro de Permissoes para ${nome}</h1>
 					</tr>
-				</c:forEach>
-              <tr></tr>
-				
-				<td><li class="btn btn-default"><span><a
-							href="${s:mvcUrl('UC#listar').build()}">Atualizar</a></span></li></td>
-			</tr>
+					<p>${message}</p>
+
+
+					<tr>Permissões:
+					</tr>
+					<div>
+						<tr>
+							<form:checkboxes path="roles" items="${listaRoles1}" />
+						</tr>
+					</div>
+					<tr>
+						<input type="submit" name="submit" value="Atualizar">
+					</tr>
+
+
+				</form:form></td>
+
+
+
+
+
+
 
 		</div>
 	</section>

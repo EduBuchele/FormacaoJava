@@ -13,6 +13,16 @@ public class Role implements GrantedAuthority {
 	@Id
 	private String nome;
 
+	private boolean ckbRole;
+
+	public boolean isCkbRole() {
+		return ckbRole;
+	}
+
+	public void setCkbRole(boolean ckbRole) {
+		this.ckbRole = ckbRole;
+	}
+
 	public Role() {
 	}
 

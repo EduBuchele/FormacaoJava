@@ -38,14 +38,26 @@ public class UsuarioDAO implements UserDetailsService {
 				.getResultList();
 	}
 
-	public List<Role> listarRoles() {
-		return manager.createQuery("select r from Role r", Role.class).getResultList();
-	}
-
 	public void gravar(Usuario usuario) {
 		Role roleAdmin = new Role("ROLE_ADMIN");
 		usuario.setRoles(Arrays.asList(roleAdmin));
 		manager.persist(usuario);
+	}
+
+	public Usuario find(String nome) {
+		return manager
+				.createQuery("select distinct(p) from Usuario p join fetch p.roles where p.nome = :nome", Usuario.class)
+				.setParameter("nome", nome).getSingleResult();
+	}
+
+	public void atualiza(Usuario usuario, String nome) {
+		Usuario userDB = manager
+				.createQuery("select distinct(p) from Usuario p join fetch p.roles where p.nome = :nome", Usuario.class)
+				.setParameter("nome", nome).getSingleResult();
+		userDB.setRoles(usuario.getRoles());
+
+		manager.merge(userDB);
+
 	}
 
 }

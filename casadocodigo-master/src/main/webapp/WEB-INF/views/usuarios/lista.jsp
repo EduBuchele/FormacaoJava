@@ -28,21 +28,24 @@
 						<td>${usuario.nome }</td>
 						<td>${usuario.email }</td>
 						<td>${usuario.roles }</td>
-						<td>
-						<form:form action="${s:mvcUrl('UC#roles').build()}">
-					<input type="submit" value="Editar Roles" />
-				</form:form>
-						</td>
 
+						<td><form:form
+								action="${s:mvcUrl('UC#editaRoles').arg(0, usuario.nome).build() }"
+								method="POST">
+								<input type="image"
+									src="${contextPath }resources/imagens/editar.png" alt="Edit"
+									title="Editar" />
+							</form:form></td>
 					</tr>
 				</c:forEach>
 
 			</table>
 			<ul>
-				<form:form action="${s:mvcUrl('UC#form').build()}">
-					<input type="submit" value="Cadastro de Usuario" />
-				</form:form>
+				<td><li class="btn btn-default"><span><a
+							href="${s:mvcUrl('UC#form').build()}">Cadastro de Usuario</a></span></li></td>
 
+				</td>
+				</li>
 			</ul>
 		</div>
 	</section>

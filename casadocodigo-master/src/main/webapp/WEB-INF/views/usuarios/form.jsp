@@ -11,7 +11,7 @@
 	titulo="Livros de Java, Android, iPhone, Ruby, PHP e muito mais ....">
 
 	<section>
-		<body>
+		
 			<div class="container">
 				<h1>Cadastro de Usuarios</h1>
 				<form:form action="${s:mvcUrl('UC#gravarUsuario').build() }"
@@ -46,7 +46,7 @@
 						style="min-width: 25%">Cadastrar</button>
 				</form:form>
 			</div>
-		</body>
+		
 
 	</section>
 
