@@ -21,8 +21,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/produtos/detalhes/**").permitAll().antMatchers("/produtos/**")
 				.hasRole("ADMIN").antMatchers("/carrinho/**").permitAll().antMatchers("/pagamento/**").permitAll()
-				.antMatchers("/pedidos/**").hasRole("ADMIN").antMatchers("/relatorio-produtos/**").permitAll()
-				.antMatchers("/").permitAll().antMatchers("/usuarios/**").permitAll()
+				.antMatchers("/pedidos/**").hasRole("ADMIN").antMatchers("/relatorio-produtos/**").hasRole("ADMIN")
+				.antMatchers("/").permitAll().antMatchers("/usuarios/**").hasRole("ADMIN")
 				.antMatchers("/url-magica-maluca-oajksfbvad6584i57j54f9684nvi658efnoewfmnvowefnoeijn").permitAll()
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
 				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()

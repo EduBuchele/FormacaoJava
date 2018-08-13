@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -106,11 +108,11 @@ public class UsuariosController {
 		return modelAndView;
 	}
 
-//	@ExceptionHandler(Exception.class)
-//	public ModelAndView usuarioDuplicado(RedirectAttributes redirectAttributes) {
-//		System.out.println("Usuario duplicado1");
-//		redirectAttributes.addFlashAttribute("message", "Este e-mail já esta cadastrado, favor utilizar outro!");
-//		return new ModelAndView("redirect:/usuarios/form");
-//	}
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ModelAndView usuarioDuplicado(RedirectAttributes redirectAttributes) {
+		System.out.println("Usuario duplicado1");
+		redirectAttributes.addFlashAttribute("message", "Este e-mail já esta cadastrado, favor utilizar outro!");
+		return new ModelAndView("redirect:/usuarios/form");
+	}
 
 }

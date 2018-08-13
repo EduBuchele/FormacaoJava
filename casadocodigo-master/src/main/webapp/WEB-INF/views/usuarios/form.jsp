@@ -39,7 +39,7 @@
 						<label>Confirme a Senha</label>
 						<form:input path="senha2" cssClass="form-control"
 							style="min-width:100%" />
-						<form:errors path="senha" />
+						<form:errors path="senha2" />
 					</div>
 
 					<button type="submit" class="btn btn-primary"

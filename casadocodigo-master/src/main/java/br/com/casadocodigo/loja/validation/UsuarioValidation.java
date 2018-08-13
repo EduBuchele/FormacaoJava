@@ -21,12 +21,17 @@ public class UsuarioValidation implements Validator {
 
 		Usuario usuario = (Usuario) target;
 
-		if (usuario.getSenha().equals(usuario.getSenha2()) && usuario.getSenha().length() >= 5) {
-			System.out.println("senha igual");
+		if (usuario.getSenha().equals(usuario.getSenha2())) {
+
+		} else {
+			errors.rejectValue("senha2", "field.required");
+		}
+
+		if ((usuario.getSenha().length() >= 5)) {
+
 		} else {
 			errors.rejectValue("senha", "field.required");
 		}
 
 	}
-
 }
